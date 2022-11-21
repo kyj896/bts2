@@ -1,4 +1,5 @@
 import db
+import crawling
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
@@ -23,6 +24,12 @@ def action_page():
 def msg():
     contact_list = db.select_data()
     return render_template("message.html", data=contact_list)
+
+@app.route('/movie')
+def movie():
+    contact_list = crawling.get_movie()
+    return render_template("movie.html", data=contact_list)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
